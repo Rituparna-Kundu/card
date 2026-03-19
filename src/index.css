@@ -1025,13 +1025,13 @@ select:focus {
   .canvas-glow-frame {
     width: 100%;
     max-width: 400px;
-    aspect-ratio: 4/6;
+    aspect-ratio: 400 / 560;
   }
 
   #card-canvas,
   .canvas-glow-frame svg {
-    width: 100% !important;
-    height: 100% !important;
+    width: 100%;
+    height: 100%;
     max-width: 100%;
   }
 

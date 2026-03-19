@@ -32,6 +32,15 @@ export async function exportCardAsImage(elementId = 'card-canvas', filename = 'e
             style: {
                 transform: 'scale(1)',
                 transformOrigin: 'top left',
+                // Force absolute dimensions during export to override mobile responsive CSS
+                width: '400px',
+                height: '560px',
+                left: '0',
+                top: '0',
+                margin: '0',
+                padding: '0',
+                // Ensure correct relative layout context for absolute elements inside
+                position: 'relative',
             }
         });
 
