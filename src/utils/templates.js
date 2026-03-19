@@ -108,6 +108,38 @@ const TEMPLATES = [
     bg: { type: 'color', value: '#064e3b' },
     borderColor: '#fbbf24',
   },
+  {
+    id: 'pearl-minimalist',
+    name: 'Pearl Minimalist',
+    emoji: '🕊️',
+    description: 'Clean White & Slate Elegance',
+    structured: true,
+    layoutId: 'PearlLayout',
+    layoutProps: {
+      bgColor: '#f8fafc',
+      textColor: '#334155',
+      accentColor: '#94a3b8',
+      highlightColor: '#cbd5e1',
+    },
+    bg: { type: 'color', value: '#f8fafc' },
+    borderColor: '#94a3b8',
+  },
+  {
+    id: 'sapphire-geometric',
+    name: 'Sapphire Geometric',
+    emoji: '💠',
+    description: 'Modern Dark Blue Grid',
+    structured: true,
+    layoutId: 'SapphireLayout',
+    layoutProps: {
+      bgColor: '#0f172a',
+      archColor: '#1e293b',
+      textColor: '#e2e8f0',
+      accentColor: '#38bdf8',
+    },
+    bg: { type: 'color', value: '#0f172a' },
+    borderColor: '#38bdf8',
+  },
 ];
 
 export default TEMPLATES;

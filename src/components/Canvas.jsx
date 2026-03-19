@@ -1,5 +1,5 @@
-import React, { useState, useRef, useMemo } from 'react';
-import { ClassicLayout, CosmicLayout, FloralLayout, MandalaLayout, MajesticLayout } from './StructuredLayouts';
+import React, { useState, useRef, useMemo, useEffect } from 'react';
+import { ClassicLayout, CosmicLayout, FloralLayout, MandalaLayout, MajesticLayout, PearlLayout, SapphireLayout } from './StructuredLayouts';
 
 const LAYOUT_MAP = {
   ClassicLayout,
@@ -7,6 +7,8 @@ const LAYOUT_MAP = {
   FloralLayout,
   MandalaLayout,
   MajesticLayout,
+  PearlLayout,
+  SapphireLayout
 };
 
 /* Generate a set of random sparkle particles */
@@ -101,11 +103,16 @@ const Canvas = ({ elements, updateElement, removeElement, activeElementId, setAc
           style={{
             width: '400px',
             height: '560px',
+            minWidth: '400px', // Prevent flex shrinking
+            minHeight: '560px', // Prevent flex shrinking
             background: structuredLayout ? 'none' : renderBackground(),
             position: 'relative',
             overflow: 'hidden',
             borderRadius: '20px',
             cursor: isDragging ? 'grabbing' : 'default',
+            // Force rendering context
+            isolation: 'isolate',
+            transform: 'translateZ(0)',
           }}
         >
           {/* Structured SVG layout fills the whole card */}

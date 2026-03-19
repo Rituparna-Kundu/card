@@ -344,13 +344,115 @@ export function MajesticLayout({
       <text x="200" y="205" textAnchor="middle" fontFamily="'Anek Bangla',sans-serif" fontSize="30" fontWeight="700" fill={textColor}>ঈদ মুবারক</text>
       <text x="200" y="265" textAnchor="middle" fontFamily="Georgia,serif" fontSize="56" fontWeight="bold" fontStyle="italic" fill={textColor}>Eid</text>
       <text x="200" y="318" textAnchor="middle" fontFamily="Georgia,serif" fontSize="48" fontWeight="bold" fontStyle="italic" fill={textColor}>Mubarak</text>
-
       {hasMsg ? (
         <>
           <Msg text={messageBn} x={200} y={400} color={messageColor || textColor} font={`'${messageFont}', sans-serif`} size={parseInt(messageSize)} />
           <Msg text={messageEn} x={200} y={messageBn ? 400 + parseInt(messageSize) * 2.5 : 400} color={messageColor || textColor} font={`'${messageFont}', sans-serif`} size={Math.max(10, parseInt(messageSize) - 1)} />
         </>
       ) : <Lines color={messageColor || accentColor} x1={75} x2={325} y0={400} gap={28} n={3} />}
+    </svg>
+  );
+}
+
+/* ─── 6. PEARL MINIMALIST ──────────────────────────────────────────────── */
+export function PearlLayout({
+  bgColor = '#f8fafc', textColor = '#334155', accentColor = '#94a3b8', highlightColor = '#cbd5e1',
+  messageBn = '', messageEn = '', toName = '', fromName = '',
+  messageFont = 'Anek Bangla', messageSize = '13', messageColor = '',
+}) {
+  const hasMsg = !!(messageBn || messageEn);
+  return (
+    <svg width="400" height="560" viewBox="0 0 400 560" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block' }}>
+      <defs>
+        <radialGradient id="pearl-bg" cx="50%" cy="50%" r="70%">
+          <stop offset="0%" stopColor="#ffffff" /><stop offset="100%" stopColor={bgColor} />
+        </radialGradient>
+      </defs>
+      <rect width="400" height="560" fill="url(#pearl-bg)" />
+      
+      {/* Very subtle border */}
+      <rect x="24" y="24" width="352" height="512" rx="4" fill="none" stroke={highlightColor} strokeWidth="1" opacity="0.6" />
+      <rect x="32" y="32" width="336" height="496" rx="2" fill="none" stroke={accentColor} strokeWidth="0.5" opacity="0.3" />
+
+      {/* Modern thin arch */}
+      <path d="M60 180 C60 120 130 90 200 90 C270 90 340 120 340 180 L340 480 Q340 490 330 490 L70 490 Q60 490 60 480 Z" fill="none" stroke={accentColor} strokeWidth="1" opacity="0.4" />
+
+      <g transform="translate(200,60) scale(0.8)">
+         <path d={SL} fill={accentColor} opacity="0.6" />
+      </g>
+
+      <text x="200" y="210" textAnchor="middle" fontFamily="'Anek Bangla',sans-serif" fontSize="24" fontWeight="600" fill={textColor} letterSpacing="1">ঈদ মুবারক</text>
+      <text x="200" y="260" textAnchor="middle" fontFamily="'Inter',sans-serif" fontSize="42" fontWeight="300" letterSpacing="4" fill={textColor}>EID</text>
+      <text x="200" y="300" textAnchor="middle" fontFamily="'Inter',sans-serif" fontSize="32" fontWeight="300" letterSpacing="6" fill={accentColor}>MUBARAK</text>
+
+      <line x1="140" y1="330" x2="260" y2="330" stroke={highlightColor} strokeWidth="1" />
+
+      {hasMsg ? (
+        <>
+          <Msg text={messageBn} x={200} y={390} color={messageColor || textColor} font={`'${messageFont}', sans-serif`} size={parseInt(messageSize)} />
+          <Msg text={messageEn} x={200} y={messageBn ? 390 + parseInt(messageSize) * 2.5 : 390} color={messageColor || accentColor} font={`'${messageFont}', sans-serif`} size={Math.max(10, parseInt(messageSize) - 1)} />
+        </>
+      ) : <Lines color={messageColor || accentColor} x1={90} x2={310} y0={390} gap={28} n={3} dash="1,4" />}
+    </svg>
+  );
+}
+
+/* ─── 7. SAPPHIRE GEOMETRIC ────────────────────────────────────────────── */
+export function SapphireLayout({
+  bgColor = '#0f172a', archColor = '#1e293b', textColor = '#e2e8f0', accentColor = '#38bdf8',
+  messageBn = '', messageEn = '', toName = '', fromName = '',
+  messageFont = 'Anek Bangla', messageSize = '13', messageColor = '',
+}) {
+  const hasMsg = !!(messageBn || messageEn);
+  
+  // Generate some geometric background data
+  const grid = [];
+  for(let i=0; i<=400; i+=40) {
+    grid.push(<line key={`v${i}`} x1={i} y1={0} x2={i} y2={560} stroke={accentColor} strokeWidth="1" opacity="0.05" />);
+  }
+  for(let j=0; j<=560; j+=40) {
+    grid.push(<line key={`h${j}`} x1={0} y1={j} x2={400} y2={j} stroke={accentColor} strokeWidth="1" opacity="0.05" />);
+  }
+
+  return (
+    <svg width="400" height="560" viewBox="0 0 400 560" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block' }}>
+      <rect width="400" height="560" fill={bgColor} />
+      
+      {/* Grid Pattern */}
+      {grid}
+
+      {/* Geometric background shapes */}
+      <polygon points="0,0 200,100 0,200" fill={accentColor} opacity="0.03" />
+      <polygon points="400,0 200,100 400,200" fill="#818cf8" opacity="0.03" />
+      <polygon points="200,460 400,560 0,560" fill={accentColor} opacity="0.04" />
+
+      {/* Hexagon Arch */}
+      <path d="M100 120 L300 120 L350 200 L350 480 L200 530 L50 480 L50 200 Z" fill={archColor} stroke={accentColor} strokeWidth="2" strokeOpacity="0.4" />
+      <path d="M110 130 L290 130 L335 205 L335 470 L200 515 L65 470 L65 205 Z" fill="none" stroke="#818cf8" strokeWidth="1" strokeOpacity="0.3" />
+
+      {/* Tech-style Mosque */}
+      <g fill="none" stroke={accentColor} strokeWidth="1.5" opacity="0.7">
+         <rect x="160" y="160" width="80" height="20" />
+         <path d="M160 160 L200 120 L240 160" />
+         <circle cx="200" cy="120" r="4" fill={accentColor} />
+         
+         <rect x="130" y="140" width="15" height="40" />
+         <path d="M130 140 L137.5 120 L145 140" />
+         
+         <rect x="255" y="140" width="15" height="40" />
+         <path d="M255 140 L262.5 120 L270 140" />
+      </g>
+
+      <text x="200" y="240" textAnchor="middle" fontFamily="'Anek Bangla',sans-serif" fontSize="26" fontWeight="700" fill={textColor}>ঈদ মুবারক</text>
+      <text x="200" y="300" textAnchor="middle" fontFamily="'Outfit',sans-serif" fontSize="54" fontWeight="800" letterSpacing="2" fill={accentColor}>EID</text>
+      <text x="200" y="340" textAnchor="middle" fontFamily="'Outfit',sans-serif" fontSize="28" fontWeight="600" letterSpacing="8" fill="#818cf8">MUBARAK</text>
+
+      {hasMsg ? (
+        <>
+          <Msg text={messageBn} x={200} y={400} color={messageColor || textColor} font={`'${messageFont}', sans-serif`} size={parseInt(messageSize)} />
+          <Msg text={messageEn} x={200} y={messageBn ? 400 + parseInt(messageSize) * 2.5 : 400} color={messageColor || "#94a3b8"} font={`'${messageFont}', sans-serif`} size={Math.max(10, parseInt(messageSize) - 1)} />
+        </>
+      ) : <Lines color={messageColor || accentColor} x1={80} x2={320} y0={410} gap={24} n={3} dash="4,4" />}
     </svg>
   );
 }

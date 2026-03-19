@@ -18,14 +18,17 @@ export async function exportCardAsImage(elementId = 'card-canvas', filename = 'e
         await document.fonts.ready;
     }
 
-    // Optional: wait a tiny bit to ensure Google Fonts and background images are painted.
-    await new Promise(r => setTimeout(r, 200));
+    // Optional: wait a bit to ensure Google Fonts and background images are painted.
+    // Increased timeout to allow large webfonts to fully parse
+    await new Promise(r => setTimeout(r, 600));
 
     try {
         const dataUrl = await toPng(element, {
             cacheBust: true,
             pixelRatio: 2, // 2x resolution for crisp output
             skipAutoScale: false,
+            // Include fonts explicitly although html-to-image tries to do this, 
+            // sometimes it needs a nudge, and 600ms timeout usually let's it grab them.
             // Provide explicit dimensions to avoid flexbox collapse bugs in html-to-image
             width: 400,
             height: 560,
@@ -35,12 +38,15 @@ export async function exportCardAsImage(elementId = 'card-canvas', filename = 'e
                 // Force absolute dimensions during export to override mobile responsive CSS
                 width: '400px',
                 height: '560px',
+                minWidth: '400px',
+                minHeight: '560px',
                 left: '0',
                 top: '0',
                 margin: '0',
                 padding: '0',
                 // Ensure correct relative layout context for absolute elements inside
                 position: 'relative',
+                overflow: 'hidden'
             }
         });
 

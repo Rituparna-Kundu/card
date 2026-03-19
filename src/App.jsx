@@ -21,6 +21,7 @@ function App() {
   const [messageColor, setMessageColor] = useState('');
   const [toLabel, setToLabel] = useState({ bangla: 'প্রতি', english: 'To' });
   const [fromLabel, setFromLabel] = useState({ bangla: 'পক্ষ থেকে', english: 'From' });
+  const [isPreviewMode, setIsPreviewMode] = useState(false);
 
   // Keep a ref so the keyboard handler always sees current state
   const stateRef = useRef({ activeElementId, elements });
@@ -81,6 +82,47 @@ function App() {
     setIsExporting(false);
   };
 
+  const handleShare = async () => {
+    setActiveElementId(null);
+    setIsExporting(true);
+    await new Promise(r => setTimeout(r, 150));
+    
+    try {
+      const { toPng } = await import('html-to-image');
+      const element = document.getElementById('card-canvas');
+      if (!element) throw new Error('Canvas not found');
+      
+      const dataUrl = await toPng(element, { cacheBust: true, pixelRatio: 2 });
+      const blob = await (await fetch(dataUrl)).blob();
+      const file = new File([blob], 'eid-mubarak-card.png', { type: 'image/png' });
+      
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          files: [file],
+          title: 'Eid Mubarak!',
+          text: 'Here is an Eid card for you.',
+        });
+      } else {
+        alert("Sharing not supported on this browser. Use the download button instead.");
+      }
+    } catch (err) {
+      console.error('[share] Failed to share card:', err);
+      alert("Could not share the card. Please try downloading it.");
+    } finally {
+      setIsExporting(false);
+    }
+  };
+
+  // Prevent scrolling when in preview mode
+  useEffect(() => {
+    if (isPreviewMode) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto'; // Or whatever the default was
+    }
+    return () => { document.body.style.overflow = 'auto'; };
+  }, [isPreviewMode]);
+
   return (
     <div className="app-container">
       <header className="header">
@@ -105,17 +147,34 @@ function App() {
           </div>
           <span className="header-title-text" style={{ letterSpacing: '0.5px' }}>RuhaniCards</span>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <span style={{ fontSize: '12px', color: 'var(--text-muted)', fontWeight: 500 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <span style={{ fontSize: '12px', color: 'var(--text-muted)', fontWeight: 500, marginRight: '8px' }}>
             {elements.length} element{elements.length !== 1 ? 's' : ''}
           </span>
+          <button
+            onClick={() => { setActiveElementId(null); setIsPreviewMode(true); }}
+            className="btn-primary"
+            title="Full Screen Preview"
+            style={{ padding: '9px 12px', background: 'rgba(255,255,255,0.1)', flex: 'none', width: 'auto' }}
+          >
+            👁️
+          </button>
+          <button
+            onClick={handleShare}
+            disabled={isExporting}
+            className="btn-primary"
+            title="Share Card"
+            style={{ padding: '9px 12px', background: 'rgba(255,255,255,0.1)', flex: 'none', width: 'auto', opacity: isExporting ? 0.7 : 1, cursor: isExporting ? 'wait' : 'pointer' }}
+          >
+            📤
+          </button>
           <button
             onClick={handleExport}
             disabled={isExporting}
             className="btn-primary"
             style={{
               width: 'auto',
-              padding: '9px 22px',
+              padding: '9px 16px',
               display: 'flex',
               alignItems: 'center',
               gap: '6px',
@@ -124,10 +183,61 @@ function App() {
               background: isExporting ? '#475569' : undefined
             }}
           >
-            {isExporting ? '⏳ Exporting...' : '⬇ Download Card'}
+            {isExporting ? '⏳' : '⬇ Download'}
           </button>
         </div>
       </header>
+      
+      {/* Full Screen Preview Overlay */}
+      {isPreviewMode && (
+        <div className="preview-overlay" style={{
+          position: 'fixed', inset: 0, zIndex: 1000, background: 'rgba(0,0,0,0.92)',
+          backdropFilter: 'blur(10px)', display: 'flex', alignItems: 'center', justifyContent: 'center',
+          animation: 'fadeIn 0.3s ease'
+        }} onClick={() => setIsPreviewMode(false)}>
+            <div style={{ position: 'relative', transform: 'scale(1.1)', transformOrigin: 'center center' }}>
+              <button 
+                 onClick={() => setIsPreviewMode(false)}
+                 style={{
+                   position: 'absolute', top: '-40px', right: '-40px',
+                   color: 'white', background: 'rgba(255,255,255,0.1)',
+                   border: '1px solid rgba(255,255,255,0.2)', width: '40px', height: '40px',
+                   borderRadius: '50%', fontSize: '18px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                   cursor: 'pointer', transition: 'all 0.2s', zIndex: 1010
+                 }}
+                 onMouseOver={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.2)'; e.currentTarget.style.transform = 'scale(1.1)'; }}
+                 onMouseOut={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; e.currentTarget.style.transform = 'scale(1)'; }}
+              >
+                ✕
+              </button>
+              <div style={{ pointerEvents: 'none' }}>
+                {/* Clone the canvas slightly, making it non-interactive but identical looking */}
+                <Canvas
+                  elements={elements}
+                  updateElement={() => {}}
+                  removeElement={() => {}}
+                  activeElementId={null}
+                  setActiveElementId={() => {}}
+                  canvasBg={canvasBg}
+                  canvasBorderColor={canvasBorderColor}
+                  toName={toName}
+                  fromName={fromName}
+                  messageBn={messageBn}
+                  messageEn={messageEn}
+                  messageFont={messageFont}
+                  messageSize={messageSize}
+                  messageColor={messageColor}
+                  isExporting={true} // hides UI like delete buttons and sparkles (optional)
+                  structuredLayout={structuredLayout}
+                />
+              </div>
+            </div>
+            <div style={{ position: 'absolute', bottom: '30px', color: 'rgba(255,255,255,0.5)', fontSize: '14px', letterSpacing: '2px', textTransform: 'uppercase' }}>
+              Click anywhere to close preview
+            </div>
+        </div>
+      )}
+
       <main className="workspace-area">
         <ToolsPanel
           selectedTool={selectedTool}
