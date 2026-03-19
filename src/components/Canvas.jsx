@@ -1,11 +1,12 @@
 import React, { useState, useRef, useMemo } from 'react';
-import { ClassicLayout, CosmicLayout, FloralLayout, MandalaLayout } from './StructuredLayouts';
+import { ClassicLayout, CosmicLayout, FloralLayout, MandalaLayout, MajesticLayout } from './StructuredLayouts';
 
 const LAYOUT_MAP = {
   ClassicLayout,
   CosmicLayout,
   FloralLayout,
   MandalaLayout,
+  MajesticLayout,
 };
 
 /* Generate a set of random sparkle particles */
@@ -176,25 +177,36 @@ const Canvas = ({ elements, updateElement, removeElement, activeElementId, setAc
           {toName && (
             <div style={{
               position: 'absolute',
-              top: '22px',
-              left: 0,
-              right: 0,
-              textAlign: 'center',
+              top: '24px',
+              left: '50%',
+              transform: 'translateX(-50%)',
               zIndex: 10,
               pointerEvents: 'none',
-              padding: '0 28px',
+              whiteSpace: 'nowrap',
             }}>
-              <span style={{
-                fontFamily: "'Outfit', 'Anek Bangla', sans-serif",
-                fontSize: '19px',
-                fontWeight: 800,
-                color: hexToRgba(canvasBorderColor || '#fde68a', 1),
-                letterSpacing: '1.5px',
-                textTransform: 'uppercase',
-                textShadow: `0 0 18px ${hexToRgba(canvasBorderColor || '#fde68a', 0.9)}, 0 2px 6px rgba(0,0,0,0.5)`,
+              <div style={{
+                padding: '6px 20px',
+                background: 'rgba(0, 0, 0, 0.45)',
+                backdropFilter: 'blur(10px)',
+                borderRadius: '30px',
+                border: `1.5px solid ${hexToRgba(canvasBorderColor || '#fde68a', 0.5)}`,
+                boxShadow: `0 0 15px ${hexToRgba(canvasBorderColor || '#fde68a', 0.3)}`,
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
               }}>
-                ✦ Wishing {toName} ✦
-              </span>
+                <span style={{
+                  fontFamily: "'Outfit', 'Anek Bangla', sans-serif",
+                  fontSize: '16px',
+                  fontWeight: 800,
+                  color: hexToRgba(canvasBorderColor || '#fde68a', 1),
+                  letterSpacing: '1.2px',
+                  textTransform: 'uppercase',
+                  textShadow: `0 0 12px ${hexToRgba(canvasBorderColor || '#fde68a', 0.7)}`,
+                }}>
+                  ✦ Wishing {toName} ✦
+                </span>
+              </div>
             </div>
           )}
 
@@ -282,25 +294,34 @@ const Canvas = ({ elements, updateElement, removeElement, activeElementId, setAc
           {fromName && (
             <div style={{
               position: 'absolute',
-              bottom: '22px',
-              left: 0,
-              right: 0,
-              textAlign: 'center',
+              bottom: '24px',
+              left: '50%',
+              transform: 'translateX(-50%)',
               zIndex: 10,
               pointerEvents: 'none',
-              padding: '0 28px',
+              whiteSpace: 'nowrap',
             }}>
-              <span style={{
-                fontFamily: "'Outfit', 'Inter', sans-serif",
-                fontSize: '16px',
-                fontStyle: 'italic',
-                fontWeight: 700,
-                color: hexToRgba(canvasBorderColor || '#fde68a', 1),
-                letterSpacing: '0.5px',
-                textShadow: `0 0 16px ${hexToRgba(canvasBorderColor || '#fde68a', 0.85)}, 0 2px 6px rgba(0,0,0,0.5)`,
+              <div style={{
+                padding: '5px 18px',
+                background: 'rgba(0, 0, 0, 0.45)',
+                backdropFilter: 'blur(10px)',
+                borderRadius: '30px',
+                border: `1px solid ${hexToRgba(canvasBorderColor || '#fde68a', 0.35)}`,
+                display: 'flex',
+                alignItems: 'center',
               }}>
-                — From your beloved {fromName} —
-              </span>
+                <span style={{
+                  fontFamily: "'Outfit', 'Inter', sans-serif",
+                  fontSize: '14px',
+                  fontStyle: 'italic',
+                  fontWeight: 700,
+                  color: hexToRgba(canvasBorderColor || '#fde68a', 0.95),
+                  letterSpacing: '0.4px',
+                  textShadow: `0 0 12px ${hexToRgba(canvasBorderColor || '#fde68a', 0.5)}`,
+                }}>
+                  — From your beloved {fromName} —
+                </span>
+              </div>
             </div>
           )}
         </div>

@@ -137,12 +137,12 @@ export function CosmicLayout({
       </defs>
       <rect width="400" height="560" fill="url(#co-bg)" />
       {stars.map((s, i) => <circle key={i} cx={s.cx} cy={s.cy} r={s.r} fill="white" opacity={0.3 + (i % 4) * 0.18} />)}
-      <ellipse cx="200" cy="110" rx="220" ry="90" fill="url(#co-gl)" opacity="0.7" />
+      <ellipse cx="200" cy="128" rx="220" ry="90" fill="url(#co-gl)" opacity="0.7" />
       {/* crescent */}
-      <circle cx="200" cy="82" r="56" fill="#fde68a" opacity="0.92" />
-      <circle cx="226" cy="68" r="48" fill="#060620" />
-      <circle cx="200" cy="82" r="62" fill="none" stroke="#fde68a" strokeWidth="1" opacity="0.2" />
-      {[{ x: 152, y: 38 }, { x: 256, y: 52 }, { x: 244, y: 118 }, { x: 158, y: 116 }].map((p, i) => (
+      <circle cx="200" cy="100" r="56" fill="#fde68a" opacity="0.92" />
+      <circle cx="226" cy="86" r="48" fill="#060620" />
+      <circle cx="200" cy="100" r="62" fill="none" stroke="#fde68a" strokeWidth="1" opacity="0.2" />
+      {[{ x: 152, y: 56 }, { x: 256, y: 70 }, { x: 244, y: 136 }, { x: 158, y: 134 }].map((p, i) => (
         <g key={i} transform={`translate(${p.x},${p.y})`}><path d={SS} fill="#fde68a" opacity="0.65" /></g>
       ))}
       <Lan x={38} w={28} h={48} c={accentColor} sw={1.5} />
@@ -150,17 +150,17 @@ export function CosmicLayout({
       <Lan x={90} w={20} h={34} c={accentColor} sw={1.2} />
       <Lan x={310} w={20} h={34} c={accentColor} sw={1.2} />
       {/* panel */}
-      <rect x="28" y="152" width="344" height="380" rx="18" fill="rgba(8,4,32,0.88)" stroke={accentColor} strokeWidth="0.8" strokeOpacity="0.4" />
-      <rect x="28" y="152" width="344" height="3" rx="1" fill={accentColor} opacity="0.35" />
-      <text x="200" y="200" textAnchor="middle" fontFamily="'Anek Bangla',sans-serif" fontSize="26" fontWeight="700" fill="#e9d5ff">ঈদ মুবারক</text>
-      <text x="200" y="255" textAnchor="middle" fontFamily="Georgia,serif" fontSize="50" fontWeight="bold" fontStyle="italic" fill="#f3e8ff">Eid</text>
-      <text x="200" y="303" textAnchor="middle" fontFamily="Georgia,serif" fontSize="44" fontWeight="bold" fontStyle="italic" fill="#f3e8ff">Mubarak</text>
+      <rect x="28" y="158" width="344" height="374" rx="18" fill="rgba(8,4,32,0.88)" stroke={accentColor} strokeWidth="0.8" strokeOpacity="0.4" />
+      <rect x="28" y="158" width="344" height="3" rx="1" fill={accentColor} opacity="0.35" />
+      <text x="200" y="206" textAnchor="middle" fontFamily="'Anek Bangla',sans-serif" fontSize="26" fontWeight="700" fill="#e9d5ff">ঈদ মুবারক</text>
+      <text x="200" y="261" textAnchor="middle" fontFamily="Georgia,serif" fontSize="50" fontWeight="bold" fontStyle="italic" fill="#f3e8ff">Eid</text>
+      <text x="200" y="309" textAnchor="middle" fontFamily="Georgia,serif" fontSize="44" fontWeight="bold" fontStyle="italic" fill="#f3e8ff">Mubarak</text>
       {hasMsg ? (
         <>
-          <Msg text={messageBn} x={200} y={386} color={messageColor || '#d8b4fe'} font={`'${messageFont}', sans-serif`} size={parseInt(messageSize)} />
-          <Msg text={messageEn} x={200} y={messageBn ? 386 + parseInt(messageSize) * 2.5 : 386} color={messageColor || '#c4b5fd'} font={`'${messageFont}', sans-serif`} size={Math.max(10, parseInt(messageSize) - 1)} />
+          <Msg text={messageBn} x={200} y={392} color={messageColor || '#d8b4fe'} font={`'${messageFont}', sans-serif`} size={parseInt(messageSize)} />
+          <Msg text={messageEn} x={200} y={messageBn ? 392 + parseInt(messageSize) * 2.5 : 392} color={messageColor || '#c4b5fd'} font={`'${messageFont}', sans-serif`} size={Math.max(10, parseInt(messageSize) - 1)} />
         </>
-      ) : <Lines color={messageColor || accentColor} x1={70} x2={330} y0={388} gap={24} n={3} />}
+      ) : <Lines color={messageColor || accentColor} x1={70} x2={330} y0={394} gap={24} n={3} />}
     </svg>
   );
 }
@@ -282,6 +282,75 @@ export function MandalaLayout({
           <Msg text={messageEn} x={200} y={messageBn ? 418 + parseInt(messageSize) * 2.5 : 418} color={messageColor || "#c9b88a"} font={`'${messageFont}', sans-serif`} size={Math.max(10, parseInt(messageSize) - 1)} />
         </>
       ) : <Lines color={messageColor || accentColor} x1={65} x2={335} y0={418} gap={24} n={3} />}
+    </svg>
+  );
+}
+/* ─── 5. MAJESTIC EMERALD ──────────────────────────────────────────────── */
+export function MajesticLayout({
+  bgColor = '#064e3b', archColor = '#ecfdf5', textColor = '#064e3b', accentColor = '#fbbf24',
+  messageBn = '', messageEn = '', toName = '', fromName = '',
+  messageFont = 'Anek Bangla', messageSize = '13', messageColor = '',
+}) {
+  const hasMsg = !!(messageBn || messageEn);
+  return (
+    <svg width="400" height="560" viewBox="0 0 400 560" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block' }}>
+      <defs>
+        <pattern id="maj-pt" width="60" height="60" patternUnits="userSpaceOnUse">
+          <path d="M30 0 L60 30 L30 60 L0 30 Z" fill="none" stroke={accentColor} strokeWidth="0.5" opacity="0.2" />
+          <path d="M0 0 L60 60 M60 0 L0 60" stroke={accentColor} strokeWidth="0.3" opacity="0.15" />
+          <circle cx="30" cy="30" r="10" fill="none" stroke={accentColor} strokeWidth="0.5" opacity="0.25" />
+        </pattern>
+        <filter id="maj-glow">
+          <feGaussianBlur stdDeviation="3" result="blur" />
+          <feComposite in="SourceGraphic" in2="blur" operator="over" />
+        </filter>
+      </defs>
+      <rect width="400" height="560" fill={bgColor} />
+      <rect width="400" height="560" fill="url(#maj-pt)" />
+
+      {/* Ornate corner elements */}
+      {[
+        { t: "translate(0,0)", r: 0 },
+        { t: "translate(400,0)", r: 90 },
+        { t: "translate(400,560)", r: 180 },
+        { t: "translate(0,560)", r: 270 }
+      ].map((p, i) => (
+        <g key={i} transform={`${p.t} rotate(${p.r})`}>
+          <path d="M0 0 L80 0 Q40 40 0 80 Z" fill={accentColor} opacity="0.1" />
+          <path d="M0 0 L60 0 Q30 30 0 60 Z" fill={accentColor} opacity="0.15" />
+          <circle cx="20" cy="20" r="4" fill={accentColor} opacity="0.4" />
+        </g>
+      ))}
+
+      {/* Elegant Arch Panel with Double Border */}
+      <path d="M40 160C40 100 120 70 200 65C280 70 360 100 360 160L360 514Q360 530 340 530L60 530Q40 530 40 514Z"
+        fill={archColor} stroke={accentColor} strokeWidth="1.5" strokeOpacity="0.4" />
+      <path d="M50 168C50 115 125 90 200 85C275 90 350 115 350 168L350 504Q350 520 334 520L66 520Q50 520 50 504Z"
+        fill="none" stroke={accentColor} strokeWidth="0.8" strokeOpacity="0.2" />
+
+      {/* Floating Lanterns with Glow */}
+      <g filter="url(#maj-glow)">
+        <Lan x={65} w={30} h={50} c={accentColor} sw={1.5} />
+        <Lan x={335} w={30} h={50} c={accentColor} sw={1.5} />
+      </g>
+
+      <Mosque f={`${accentColor}22`} />
+
+      {/* Central Star/Moon Icon */}
+      <g transform="translate(200,120) scale(1.2)">
+        <path d={SL} fill={accentColor} filter="url(#maj-glow)" />
+      </g>
+
+      <text x="200" y="205" textAnchor="middle" fontFamily="'Anek Bangla',sans-serif" fontSize="30" fontWeight="700" fill={textColor}>ঈদ মুবারক</text>
+      <text x="200" y="265" textAnchor="middle" fontFamily="Georgia,serif" fontSize="56" fontWeight="bold" fontStyle="italic" fill={textColor}>Eid</text>
+      <text x="200" y="318" textAnchor="middle" fontFamily="Georgia,serif" fontSize="48" fontWeight="bold" fontStyle="italic" fill={textColor}>Mubarak</text>
+
+      {hasMsg ? (
+        <>
+          <Msg text={messageBn} x={200} y={400} color={messageColor || textColor} font={`'${messageFont}', sans-serif`} size={parseInt(messageSize)} />
+          <Msg text={messageEn} x={200} y={messageBn ? 400 + parseInt(messageSize) * 2.5 : 400} color={messageColor || textColor} font={`'${messageFont}', sans-serif`} size={Math.max(10, parseInt(messageSize) - 1)} />
+        </>
+      ) : <Lines color={messageColor || accentColor} x1={75} x2={325} y0={400} gap={28} n={3} />}
     </svg>
   );
 }

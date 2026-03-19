@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Anek+Bangla:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
-
+/* Removed @import to fix html-to-image bugs, Google fonts moved to index.html <link> tags */
 /* ── Design Tokens ── */
 :root {
   --bg-color: #0c0e1a;
@@ -166,30 +165,43 @@ select:focus {
   height: 34px;
 }
 
-.glitter-logo {
-  font-size: 1.8rem;
-  filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.6));
+.glitter-logo-svg {
+  width: 28px;
+  height: 28px;
+  filter: drop-shadow(0 0 10px rgba(129, 140, 248, 0.4)) drop-shadow(0 0 5px rgba(245, 158, 11, 0.3));
   animation: logoHover 4s ease-in-out infinite;
   z-index: 2;
 }
 
 .glitter-stars {
   position: absolute;
-  top: -4px;
-  right: -6px;
-  font-size: 0.9rem;
-  animation: logoStarsTwinkle 2s ease-in-out infinite;
+  top: -6px;
+  right: -8px;
+  font-size: 1.1rem;
+  animation: logoStarsTwinkle 3s ease-in-out infinite;
   z-index: 3;
 }
 
 @keyframes logoHover {
-  0%, 100% { transform: translateY(0) rotate(-4deg); }
-  50% { transform: translateY(-3px) rotate(4deg); }
+  0%, 100% { transform: translateY(0) rotate(-4deg) scale(1); }
+  50% { transform: translateY(-4px) rotate(6deg) scale(1.1); }
 }
 
 @keyframes logoStarsTwinkle {
-  0%, 100% { opacity: 0.4; transform: scale(0.8) rotate(0deg); }
-  50% { opacity: 1; transform: scale(1.2) rotate(15deg); filter: drop-shadow(0 0 4px #facc15); }
+  0%, 100% { opacity: 0.3; transform: scale(0.7) rotate(0deg); filter: blur(1px); }
+  50% { opacity: 1; transform: scale(1.3) rotate(25deg); filter: drop-shadow(0 0 6px #facc15); }
+}
+
+/* ── Shimmer Effects ── */
+@keyframes shimmerLine {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes shimmerText {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* ── Workspace ── */

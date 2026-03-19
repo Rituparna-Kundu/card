@@ -13,6 +13,11 @@ export async function exportCardAsImage(elementId = 'card-canvas', filename = 'e
         return;
     }
 
+    // Wait for all fonts to be loaded before capturing
+    if (document.fonts) {
+        await document.fonts.ready;
+    }
+
     // Optional: wait a tiny bit to ensure Google Fonts and background images are painted.
     await new Promise(r => setTimeout(r, 200));
 
@@ -21,6 +26,13 @@ export async function exportCardAsImage(elementId = 'card-canvas', filename = 'e
             cacheBust: true,
             pixelRatio: 2, // 2x resolution for crisp output
             skipAutoScale: false,
+            // Provide explicit dimensions to avoid flexbox collapse bugs in html-to-image
+            width: 400,
+            height: 560,
+            style: {
+                transform: 'scale(1)',
+                transformOrigin: 'top left',
+            }
         });
 
         const link = document.createElement('a');

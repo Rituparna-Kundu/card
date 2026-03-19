@@ -86,7 +86,21 @@ function App() {
       <header className="header">
         <div className="header-title">
           <div className="glitter-logo-container">
-            <span className="glitter-logo">🎴</span>
+            <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="glitter-logo-svg">
+              <defs>
+                <linearGradient id="logo-grad" x1="4" y1="2" x2="28" y2="30" gradientUnits="userSpaceOnUse">
+                  <stop stopColor="#818CF8" />
+                  <stop offset="0.5" stopColor="#C084FC" />
+                  <stop offset="1" stopColor="#F59E0B" />
+                </linearGradient>
+                <filter id="logo-glow">
+                  <feGaussianBlur stdDeviation="2" result="blur" />
+                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                </filter>
+              </defs>
+              <path d="M16 2L19.4 10.6L28 12.5L21.2 18L23.4 26.5L16 22L8.6 26.5L10.8 18L4 12.5L12.6 10.6L16 2Z" fill="url(#logo-grad)" filter="url(#logo-glow)" />
+              <circle cx="16" cy="16" r="4" fill="white" opacity="0.3" />
+            </svg>
             <span className="glitter-stars">✨</span>
           </div>
           <span className="header-title-text" style={{ letterSpacing: '0.5px' }}>RuhaniCards</span>

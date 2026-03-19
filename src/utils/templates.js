@@ -92,6 +92,22 @@ const TEMPLATES = [
     bg: { type: 'color', value: '#042f2e' },
     borderColor: '#5eead4',
   },
+  {
+    id: 'royal-emerald',
+    name: 'Royal Emerald',
+    emoji: '👑',
+    description: 'Majestic Emerald & Gold Pattern',
+    structured: true,
+    layoutId: 'MajesticLayout',
+    layoutProps: {
+      bgColor: '#064e3b',
+      archColor: '#ecfdf5',
+      textColor: '#064e3b',
+      accentColor: '#fbbf24',
+    },
+    bg: { type: 'color', value: '#064e3b' },
+    borderColor: '#fbbf24',
+  },
 ];
 
 export default TEMPLATES;
