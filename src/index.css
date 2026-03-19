@@ -157,6 +157,41 @@ select:focus {
   animation: shimmerText 5s ease infinite;
 }
 
+.glitter-logo-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+}
+
+.glitter-logo {
+  font-size: 1.8rem;
+  filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.6));
+  animation: logoHover 4s ease-in-out infinite;
+  z-index: 2;
+}
+
+.glitter-stars {
+  position: absolute;
+  top: -4px;
+  right: -6px;
+  font-size: 0.9rem;
+  animation: logoStarsTwinkle 2s ease-in-out infinite;
+  z-index: 3;
+}
+
+@keyframes logoHover {
+  0%, 100% { transform: translateY(0) rotate(-4deg); }
+  50% { transform: translateY(-3px) rotate(4deg); }
+}
+
+@keyframes logoStarsTwinkle {
+  0%, 100% { opacity: 0.4; transform: scale(0.8) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.2) rotate(15deg); filter: drop-shadow(0 0 4px #facc15); }
+}
+
 /* ── Workspace ── */
 .workspace-area {
   flex: 1;
@@ -678,6 +713,11 @@ select:focus {
   background: rgba(255, 255, 255, 0.06);
   color: var(--text-main);
   font-size: 13px;
+}
+
+.select-dark option {
+  background-color: #1e293b; /* Set dark background for options since text is white */
+  color: var(--text-main);
 }
 
 /* ── Size Button ── */

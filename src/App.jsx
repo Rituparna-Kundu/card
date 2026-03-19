@@ -85,8 +85,11 @@ function App() {
     <div className="app-container">
       <header className="header">
         <div className="header-title">
-          <span style={{ fontSize: '1.4rem' }}>🕌</span>
-          <span className="header-title-text">Eid Card Creator</span>
+          <div className="glitter-logo-container">
+            <span className="glitter-logo">🎴</span>
+            <span className="glitter-stars">✨</span>
+          </div>
+          <span className="header-title-text" style={{ letterSpacing: '0.5px' }}>RuhaniCards</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <span style={{ fontSize: '12px', color: 'var(--text-muted)', fontWeight: 500 }}>
