@@ -206,11 +206,15 @@ const Canvas = ({ elements, updateElement, removeElement, activeElementId, setAc
                 display: 'flex',
                 alignItems: 'center',
                 gap: '8px',
+                whiteSpace: 'nowrap',
+                minWidth: 'max-content',
               }}>
                 <span style={{
                   fontFamily: "'Outfit', 'Anek Bangla', sans-serif",
                   fontSize: '16px',
-                  fontWeight: 400,
+                  fontWeight: 700,
+                  whiteSpace: 'nowrap',
+                  flexShrink: 0,
                   color: hexToRgba(canvasBorderColor || '#fde68a', 1),
                   letterSpacing: '1.2px',
                   textTransform: 'uppercase',
@@ -323,12 +327,16 @@ const Canvas = ({ elements, updateElement, removeElement, activeElementId, setAc
                 boxShadow: `0 4px 12px rgba(0,0,0,0.05), inset 0 0 0 1px rgba(255,255,255,0.2)`,
                 display: 'flex',
                 alignItems: 'center',
+                whiteSpace: 'nowrap',
+                minWidth: 'max-content',
               }}>
                 <span style={{
                   fontFamily: "'Outfit', 'Inter', sans-serif",
                   fontSize: '14px',
                   fontStyle: 'italic',
                   fontWeight: 700,
+                  whiteSpace: 'nowrap',
+                  flexShrink: 0,
                   color: hexToRgba(canvasBorderColor || '#fde68a', 1),
                   letterSpacing: '0.4px',
                   textShadow: `0 1px 3px rgba(0,0,0,0.15)`,

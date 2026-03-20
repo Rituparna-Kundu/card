@@ -452,7 +452,7 @@ const ToolsPanel = ({
                                     }}>
                                         <p style={{ fontSize: '10px', color: 'var(--text-muted)', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 600 }}>Preview</p>
                                         {toName && (
-                                            <p style={{ fontSize: '14px', color: '#fde68a', fontWeight: 600, fontFamily: 'Outfit' }}>
+                                            <p style={{ fontSize: '14px', color: '#fde68a', fontWeight: 700, fontFamily: 'Outfit' }}>
                                                 Wishing {toName}
                                             </p>
                                         )}
