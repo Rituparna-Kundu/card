@@ -624,3 +624,119 @@ export function VintageTicketLayout({
     </svg>
   );
 }
+
+/* ─── 11. WATERCOLOR FLORAL (HANDMADE) ─────────────────────────────────── */
+export function WatercolorFloralLayout({
+  bgColor = '#ffffff', textColor = '#334155', accentColor = '#64748b',
+  messageBn = '', messageEn = '', toName = '', fromName = '',
+  messageFont = 'Cormorant Garamond', messageSize = '14', messageColor = '',
+}) {
+  const hasMsg = !!(messageBn || messageEn);
+  const PLAQUE_PATH = "M 200,45 C 230,45 240,65 280,65 Q 340,65 340,125 C 340,175 315,195 315,280 C 315,365 340,385 340,435 Q 340,495 280,495 C 240,495 230,515 200,515 C 170,515 160,495 120,495 Q 60,495 60,435 C 60,385 85,365 85,280 C 85,195 60,175 60,125 Q 60,65 120,65 C 160,65 170,45 200,45 Z";
+
+  return (
+    <svg width="400" height="560" viewBox="0 0 400 560" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block' }}>
+      <defs>
+        <filter id="wf-dropshadow" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="2" dy="4" stdDeviation="3" floodOpacity="0.15" />
+        </filter>
+        <filter id="wf-waterblur" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="30" />
+        </filter>
+        <clipPath id="wf-plaque-clip">
+          <path d={PLAQUE_PATH} />
+        </clipPath>
+      </defs>
+      
+      {/* Background Canvas */}
+      <rect width="400" height="560" fill={bgColor} />
+      
+      {/* Plaque Shadow */}
+      <path d={PLAQUE_PATH} fill="none" filter="url(#wf-dropshadow)" />
+      
+      {/* Watercolor Fill Inside Plaque */}
+      <g clipPath="url(#wf-plaque-clip)">
+        <rect x="0" y="0" width="400" height="560" fill="#fdfbf5" />
+        {/* Blurry blobs */}
+        <circle cx="120" cy="150" r="140" fill="#bef264" filter="url(#wf-waterblur)" opacity="0.85" />
+        <circle cx="280" cy="120" r="150" fill="#d8b4fe" filter="url(#wf-waterblur)" opacity="0.85" />
+        <circle cx="160" cy="300" r="170" fill="#fde047" filter="url(#wf-waterblur)" opacity="0.8" />
+        <circle cx="320" cy="320" r="160" fill="#67e8f9" filter="url(#wf-waterblur)" opacity="0.85" />
+        <circle cx="250" cy="460" r="140" fill="#c084fc" filter="url(#wf-waterblur)" opacity="0.75" />
+        <circle cx="100" cy="420" r="140" fill="#7dd3fc" filter="url(#wf-waterblur)" opacity="0.75" />
+      </g>
+
+      {/* Plaque Outline Stroke */}
+      <path d={PLAQUE_PATH} fill="none" stroke="#9ca3af" strokeWidth="0.8" opacity="0.6" />
+
+      {/* Hand-Drawn Text EID MUBARAK */}
+      <g transform="translate(0, 50)">
+        <text x="200" y="130" textAnchor="middle" fontFamily="'Cinzel', serif" fontSize="42" letterSpacing="6" fill="none" stroke="#1f2937" strokeWidth="1.2">EID</text>
+        <text x="201.5" y="131.5" textAnchor="middle" fontFamily="'Cinzel', serif" fontSize="42" letterSpacing="6" fill="#374151" opacity="0.6">EID</text>
+
+        <text x="200" y="190" textAnchor="middle" fontFamily="'Cinzel', serif" fontSize="38" letterSpacing="5" fill="none" stroke="#1f2937" strokeWidth="1.2">MUBARAK</text>
+        <text x="201.5" y="191.5" textAnchor="middle" fontFamily="'Cinzel', serif" fontSize="38" letterSpacing="5" fill="#374151" opacity="0.6">MUBARAK</text>
+      </g>
+
+      {/* Dynamic user message text */}
+      <g transform="translate(0, 270)">
+        {hasMsg ? (
+          <>
+            <Msg text={messageBn} x={200} y={0} color={messageColor || textColor} font={`'${messageFont}', sans-serif`} size={parseInt(messageSize)} />
+            <Msg text={messageEn} x={200} y={messageBn ? parseInt(messageSize) * 2.5 : 0} color={messageColor || textColor} font={`'${messageFont}', sans-serif`} size={Math.max(10, parseInt(messageSize) - 1)} />
+          </>
+        ) : <Lines color={messageColor || accentColor} x1="120" x2="280" y0={0} gap={24} n={3} dash="2,2" />}
+      </g>
+
+      {/* Hand-Drawn Cosmos Flowers Overlay (Bottom Left) */}
+      <g transform="translate(130, 420) scale(1.6) rotate(-15)">
+        {/* Leaves */}
+        <path d="M -10,-10 Q -30,20 -45,40 Q -60,20 -30,0 Z" fill="#84cc16" stroke="#374151" strokeWidth="0.8" strokeLinejoin="round" />
+        <path d="M 0,0 Q 20,30 35,50 Q 50,30 20,10 Z" fill="#84cc16" stroke="#374151" strokeWidth="0.8" strokeLinejoin="round" transform="rotate(70)" />
+        <path d="M 0,0 Q 20,-30 35,-50 Q 50,-30 20,-10 Z" fill="#84cc16" stroke="#374151" strokeWidth="0.8" strokeLinejoin="round" transform="rotate(-60)" />
+        
+        {/* Flower 1 (back) */}
+        <g transform="translate(-25, -20) scale(0.85) rotate(30)">
+          {Array.from({length: 12}).map((_, i) => {
+             const angle = i * 30 + (i%3===0 ? 5 : 0);
+             return (
+               <g key={'f1-'+i} transform={`rotate(${angle})`}>
+                 <path d="M 0,0 L 5,-15 Q 12,-35 5,-45 Q 0,-30 0,0" fill="#ffffff" stroke="#1f2937" strokeWidth="0.8" strokeLinejoin="round" />
+                 <path d="M 0,0 L -5,-15 Q -12,-35 -5,-45 Q 0,-30 0,0" fill="#ffffff" stroke="#1f2937" strokeWidth="0.8" strokeLinejoin="round" />
+                 <path d="M 0,-10 L 0,-35" fill="none" stroke="#6b7280" strokeWidth="0.4" />
+               </g>
+             );
+          })}
+          {/* Center */}
+          <circle cx="0" cy="0" r="7" fill="#ffffff" stroke="#1f2937" strokeWidth="0.6" />
+          {Array.from({length: 18}).map((_, i) => {
+             const a = (i/18) * Math.PI * 2;
+             const d = (i%2===0 ? 2 : 5);
+             return <circle key={'d1-'+i} cx={d*Math.cos(a)} cy={d*Math.sin(a)} r="1" fill="#facc15" stroke="#1f2937" strokeWidth="0.4" />
+          })}
+        </g>
+        
+        {/* Flower 2 (front, slightly larger, overlapping) */}
+        <g transform="translate(10, 10) scale(1) rotate(-15)">
+          {Array.from({length: 14}).map((_, i) => {
+             const angle = i * (360/14) + (i%2===0 ? 4 : 0);
+             return (
+               <g key={'f2-'+i} transform={`rotate(${angle})`}>
+                 <path d="M 0,0 L 5,-15 Q 12,-35 5,-45 Q 0,-30 0,0" fill="#ffffff" stroke="#1f2937" strokeWidth="0.8" strokeLinejoin="round" />
+                 <path d="M 0,0 L -5,-15 Q -12,-35 -5,-45 Q 0,-30 0,0" fill="#ffffff" stroke="#1f2937" strokeWidth="0.8" strokeLinejoin="round" />
+                 <path d="M 0,-10 L 0,-35" fill="none" stroke="#6b7280" strokeWidth="0.4" />
+               </g>
+             );
+          })}
+          {/* Center */}
+          <circle cx="0" cy="0" r="8" fill="#ffffff" stroke="#1f2937" strokeWidth="0.6" />
+          {Array.from({length: 22}).map((_, i) => {
+             const a = (i/22) * Math.PI * 2;
+             const d = (i%3===0 ? 2 : 6);
+             return <circle key={'d2-'+i} cx={d*Math.cos(a)} cy={d*Math.sin(a)} r="1" fill="#facc15" stroke="#1f2937" strokeWidth="0.4" />
+          })}
+        </g>
+      </g>
+    </svg>
+  );
+}

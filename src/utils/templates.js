@@ -144,6 +144,17 @@ const TEMPLATES = [
     layoutProps: {},
     bg: { type: 'color', value: '#fdfbf7' },
     borderColor: '#8c7a6b',
+  },
+  {
+    id: 'watercolor-floral',
+    name: 'Watercolor Blooms',
+    emoji: '🎨',
+    description: 'Hand-drawn Florals & Tag',
+    structured: true,
+    layoutId: 'WatercolorFloralLayout',
+    layoutProps: {},
+    bg: { type: 'color', value: '#ffffff' },
+    borderColor: '#64748b',
   }
 ];
 

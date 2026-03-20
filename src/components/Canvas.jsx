@@ -1,5 +1,5 @@
 import React, { useState, useRef, useMemo, useEffect } from 'react';
-import { ClassicLayout, CosmicLayout, FloralLayout, MandalaLayout, MajesticLayout, PearlLayout, SapphireLayout, PolaroidLayout, GlassmorphismLayout, VintageTicketLayout } from './StructuredLayouts';
+import { ClassicLayout, CosmicLayout, FloralLayout, MandalaLayout, MajesticLayout, PearlLayout, SapphireLayout, PolaroidLayout, GlassmorphismLayout, VintageTicketLayout, WatercolorFloralLayout } from './StructuredLayouts';
 
 const LAYOUT_MAP = {
   ClassicLayout,
@@ -11,7 +11,8 @@ const LAYOUT_MAP = {
   SapphireLayout,
   PolaroidLayout,
   GlassmorphismLayout,
-  VintageTicketLayout
+  VintageTicketLayout,
+  WatercolorFloralLayout
 };
 
 /* Generate a set of random sparkle particles */
@@ -196,11 +197,11 @@ const Canvas = ({ elements, updateElement, removeElement, activeElementId, setAc
             }}>
               <div style={{
                 padding: '6px 20px',
-                background: 'rgba(0, 0, 0, 0.45)',
-                backdropFilter: 'blur(10px)',
+                background: hexToRgba(canvasBorderColor || '#fde68a', 0.12),
+                backdropFilter: 'blur(8px)',
                 borderRadius: '30px',
-                border: `1.5px solid ${hexToRgba(canvasBorderColor || '#fde68a', 0.5)}`,
-                boxShadow: `0 0 15px ${hexToRgba(canvasBorderColor || '#fde68a', 0.3)}`,
+                border: `1.5px solid ${hexToRgba(canvasBorderColor || '#fde68a', 0.4)}`,
+                boxShadow: `0 4px 12px rgba(0,0,0,0.05), inset 0 0 0 1px rgba(255,255,255,0.2)`,
                 display: 'flex',
                 alignItems: 'center',
                 gap: '8px',
@@ -212,7 +213,7 @@ const Canvas = ({ elements, updateElement, removeElement, activeElementId, setAc
                   color: hexToRgba(canvasBorderColor || '#fde68a', 1),
                   letterSpacing: '1.2px',
                   textTransform: 'uppercase',
-                  textShadow: `0 0 12px ${hexToRgba(canvasBorderColor || '#fde68a', 0.7)}`,
+                  textShadow: `0 1px 3px rgba(0,0,0,0.15)`,
                 }}>
                   ✦ Wishing {toName} ✦
                 </span>
@@ -313,10 +314,11 @@ const Canvas = ({ elements, updateElement, removeElement, activeElementId, setAc
             }}>
               <div style={{
                 padding: '5px 18px',
-                background: 'rgba(0, 0, 0, 0.45)',
-                backdropFilter: 'blur(10px)',
+                background: hexToRgba(canvasBorderColor || '#fde68a', 0.12),
+                backdropFilter: 'blur(8px)',
                 borderRadius: '30px',
                 border: `1px solid ${hexToRgba(canvasBorderColor || '#fde68a', 0.35)}`,
+                boxShadow: `0 4px 12px rgba(0,0,0,0.05), inset 0 0 0 1px rgba(255,255,255,0.2)`,
                 display: 'flex',
                 alignItems: 'center',
               }}>
@@ -325,9 +327,9 @@ const Canvas = ({ elements, updateElement, removeElement, activeElementId, setAc
                   fontSize: '14px',
                   fontStyle: 'italic',
                   fontWeight: 700,
-                  color: hexToRgba(canvasBorderColor || '#fde68a', 0.95),
+                  color: hexToRgba(canvasBorderColor || '#fde68a', 1),
                   letterSpacing: '0.4px',
-                  textShadow: `0 0 12px ${hexToRgba(canvasBorderColor || '#fde68a', 0.5)}`,
+                  textShadow: `0 1px 3px rgba(0,0,0,0.15)`,
                 }}>
                   — From your beloved {fromName} —
                 </span>
