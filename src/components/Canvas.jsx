@@ -1,5 +1,5 @@
 import React, { useState, useRef, useMemo, useEffect } from 'react';
-import { ClassicLayout, CosmicLayout, FloralLayout, MandalaLayout, MajesticLayout, PearlLayout, SapphireLayout } from './StructuredLayouts';
+import { ClassicLayout, CosmicLayout, FloralLayout, MandalaLayout, MajesticLayout, PearlLayout, SapphireLayout, PolaroidLayout, GlassmorphismLayout, VintageTicketLayout } from './StructuredLayouts';
 
 const LAYOUT_MAP = {
   ClassicLayout,
@@ -8,7 +8,10 @@ const LAYOUT_MAP = {
   MandalaLayout,
   MajesticLayout,
   PearlLayout,
-  SapphireLayout
+  SapphireLayout,
+  PolaroidLayout,
+  GlassmorphismLayout,
+  VintageTicketLayout
 };
 
 /* Generate a set of random sparkle particles */
@@ -272,7 +275,7 @@ const Canvas = ({ elements, updateElement, removeElement, activeElementId, setAc
               )}
               {el.type === 'text' && (
                 <div style={{
-                  fontFamily: el.fontFamily || 'Inter',
+                  fontFamily: el.fontFamily ? `'${el.fontFamily}', sans-serif` : "'Anek Bangla', sans-serif",
                   color: el.color || '#ffffff',
                   fontSize: el.fontSize || '24px',
                   fontWeight: el.fontWeight || 'bold',

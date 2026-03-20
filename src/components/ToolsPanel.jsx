@@ -23,10 +23,15 @@ const PRESET_GRADIENTS = [
 
 const STICKERS = ['🌙', '🕌', '✨', '⭐', '🏮', '📿', '🕋', '🌟', '🎆', '🤲', '💚', '🌿', '🌹', '🎁', '💫', '🪷'];
 const FONTS = [
-    'Anek Bangla', 'Inter', 'Outfit', 
-    'Playfair Display', 'Cinzel', 'Dancing Script', 
-    'Pacifico', 'Great Vibes', 'Montserrat', 
-    'Georgia', 'Impact', 'Trebuchet MS'
+    'Anek Bangla', 
+    'Cormorant Garamond', 
+    'Marcellus', 
+    'Amiri', 
+    'Sacramento', 
+    'Satisfy', 
+    'Cinzel Decorative', 
+    'Bebas Neue', 
+    'Righteous'
 ];
 const TEXT_COLORS = ['#0f172a', '#ffffff', '#fde68a', '#86efac', '#f9a8d4', '#93c5fd', '#ef4444', '#22c55e', '#c084fc', '#f59e0b'];
 const TEXT_SIZES = [
@@ -158,7 +163,7 @@ const ToolsPanel = ({
                                     <select value={activeEl.fontFamily}
                                         onChange={e => updateElement(activeElementId, { fontFamily: e.target.value })}
                                         className="select-dark">
-                                        {FONTS.map(f => <option key={f} value={f} style={{ fontFamily: f }}>{f}</option>)}
+                                        {FONTS.map(f => <option key={f} value={f} style={{ fontFamily: `'${f}', sans-serif` }}>{f}</option>)}
                                     </select>
                                 </div>
                             </>
@@ -260,7 +265,7 @@ const ToolsPanel = ({
                                 <div>
                                     <label className="section-label" style={{ display: 'block', marginBottom: '6px' }}>Font</label>
                                     <select value={textFont} onChange={e => setTextFont(e.target.value)} className="select-dark">
-                                        {FONTS.map(f => <option key={f} value={f}>{f}</option>)}
+                                        {FONTS.map(f => <option key={f} value={f} style={{ fontFamily: `'${f}', sans-serif` }}>{f}</option>)}
                                     </select>
                                 </div>
                                 <div>
@@ -376,7 +381,7 @@ const ToolsPanel = ({
                                 <div style={{ marginBottom: '4px' }}>
                                     <label className="section-label" style={{ display: 'block', marginBottom: '8px' }}>Message Font</label>
                                     <select value={messageFont} onChange={e => setMessageFont(e.target.value)} className="select-dark">
-                                        {FONTS.map(f => <option key={f} value={f}>{f}</option>)}
+                                        {FONTS.map(f => <option key={f} value={f} style={{ fontFamily: `'${f}', sans-serif` }}>{f}</option>)}
                                     </select>
                                 </div>
                                 <div>

@@ -180,6 +180,7 @@ function Petal({ cx, cy, r = 14, n = 8, color }) {
 }
 
 export function FloralLayout({
+  bgColor1 = '#fff8f4', bgColor2 = '#ffe4d8',
   archColor = '#fff5f5', textColor = '#6b2142', accentColor = '#d45c7a',
   messageBn = '', messageEn = '', toName = '', fromName = '',
   messageFont = 'Anek Bangla', messageSize = '13', messageColor = '',
@@ -189,7 +190,7 @@ export function FloralLayout({
     <svg width="400" height="560" viewBox="0 0 400 560" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block' }}>
       <defs>
         <radialGradient id="fl-bg" cx="50%" cy="50%" r="75%">
-          <stop offset="0%" stopColor="#fff8f4" /><stop offset="100%" stopColor="#ffe4d8" />
+          <stop offset="0%" stopColor={bgColor1} /><stop offset="100%" stopColor={bgColor2} />
         </radialGradient>
       </defs>
       <rect width="400" height="560" fill="url(#fl-bg)" />
@@ -453,6 +454,173 @@ export function SapphireLayout({
           <Msg text={messageEn} x={200} y={messageBn ? 400 + parseInt(messageSize) * 2.5 : 400} color={messageColor || "#94a3b8"} font={`'${messageFont}', sans-serif`} size={Math.max(10, parseInt(messageSize) - 1)} />
         </>
       ) : <Lines color={messageColor || accentColor} x1={80} x2={320} y0={410} gap={24} n={3} dash="4,4" />}
+    </svg>
+  );
+}
+
+/* ─── 8. POLAROID AESTHETIC ─────────────────────────────────────────────── */
+export function PolaroidLayout({
+  bgColor = '#f4f0ea', accentColor = '#e2a3b7', textColor = '#5c4b51',
+  messageBn = '', messageEn = '', toName = '', fromName = '',
+  messageFont = 'Dancing Script', messageSize = '18', messageColor = '',
+}) {
+  const hasMsg = !!(messageBn || messageEn);
+  return (
+    <svg width="400" height="560" viewBox="0 0 400 560" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block' }}>
+      <defs>
+        <filter id="pol-drop">
+          <feGaussianBlur in="SourceAlpha" stdDeviation="4" />
+          <feOffset dx="2" dy="5" result="offsetblur" />
+          <feComponentTransfer><feFuncA type="linear" slope="0.15" /></feComponentTransfer>
+          <feMerge><feMergeNode /><feMergeNode in="SourceGraphic" /></feMerge>
+        </filter>
+        <linearGradient id="pol-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#ffecd2" />
+          <stop offset="100%" stopColor="#fcb69f" />
+        </linearGradient>
+      </defs>
+      <rect width="400" height="560" fill={bgColor} />
+      
+      {[20, 80, 150, 320, 380].map((x, i) => (
+         <circle key={i} cx={x} cy={50 + i*100} r="1.5" fill={accentColor} opacity="0.4" />
+      ))}
+
+      <g transform="translate(200, 270) rotate(-3) translate(-200, -270)">
+        <rect x="40" y="60" width="320" height="420" fill="#ffffff" filter="url(#pol-drop)" rx="2" />
+        <rect x="55" y="75" width="290" height="300" fill="url(#pol-grad)" rx="2" />
+        
+        <circle cx="200" cy="180" r="45" fill="#ffffff" opacity="0.8" />
+        <g transform="translate(0, 60)">
+          <Mosque f="#ffffff" />
+        </g>
+        <g transform="translate(0, 30)">
+          <Lan x="100" w="24" h="40" c="#ffffff" sw="1.5" />
+          <Lan x="300" w="24" h="40" c="#ffffff" sw="1.5" />
+        </g>
+        
+        <g transform="translate(160, 45) rotate(-5)">
+          <rect x="0" y="0" width="80" height="25" fill="#fcd34d" opacity="0.6" />
+          <path d="M0 0 L5 5 L0 10 L5 15 L0 20 L5 25 L80 25 L75 20 L80 15 L75 10 L80 5 L75 0 Z" fill="#f4f0ea" opacity="0.8" />
+        </g>
+
+        <text x="200" y="420" textAnchor="middle" fontFamily="'Dancing Script', cursive, sans-serif" fontSize="36" fontWeight="bold" fill={textColor}>
+          Eid Mubarak
+        </text>
+        
+        <g transform="translate(0, 40)">
+          {hasMsg ? (
+            <>
+              <Msg text={messageBn} x={200} y={400} color={messageColor || textColor} font={`'${messageFont}', sans-serif`} size={parseInt(messageSize)} />
+              <Msg text={messageEn} x={200} y={messageBn ? 400 + parseInt(messageSize) * 2.5 : 400} color={messageColor || textColor} font={`'${messageFont}', sans-serif`} size={Math.max(10, parseInt(messageSize) - 1)} />
+            </>
+          ) : <Lines color={messageColor || accentColor} x1="100" x2="300" y0="410" gap={18} n={2} dash="2,4" />}
+        </g>
+      </g>
+    </svg>
+  );
+}
+
+/* ─── 9. GLASSMORPHISM DREAM ───────────────────────────────────────────── */
+export function GlassmorphismLayout({
+  bgColor = '#e0c3fc', accentColor = '#8ec5fc', textColor = '#ffffff',
+  messageBn = '', messageEn = '', toName = '', fromName = '',
+  messageFont = 'Outfit', messageSize = '14', messageColor = '',
+}) {
+  const hasMsg = !!(messageBn || messageEn);
+  return (
+    <svg width="400" height="560" viewBox="0 0 400 560" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block' }}>
+      <defs>
+        <linearGradient id="glass-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor={bgColor} />
+          <stop offset="100%" stopColor={accentColor} />
+        </linearGradient>
+        <filter id="glass-blur" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="24" />
+        </filter>
+        <linearGradient id="glass-border" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="rgba(255,255,255,0.7)" />
+          <stop offset="100%" stopColor="rgba(255,255,255,0.0)" />
+        </linearGradient>
+      </defs>
+      
+      <rect width="400" height="560" fill="url(#glass-bg)" />
+      
+      <circle cx="80" cy="120" r="90" fill="#ff9a9e" filter="url(#glass-blur)" opacity="0.7" />
+      <circle cx="320" cy="400" r="110" fill="#fecfef" filter="url(#glass-blur)" opacity="0.8" />
+      <circle cx="100" cy="450" r="80" fill="#a1c4fd" filter="url(#glass-blur)" opacity="0.6" />
+      <circle cx="300" cy="100" r="70" fill="#c2e9fb" filter="url(#glass-blur)" opacity="0.6" />
+
+      <rect x="30" y="40" width="340" height="480" fill="rgba(255, 255, 255, 0.1)" rx="24" stroke="url(#glass-border)" strokeWidth="1.5" />
+      
+      <rect x="45" y="55" width="310" height="450" fill="none" rx="16" stroke="#ffffff" strokeWidth="0.5" opacity="0.4" />
+
+      <g transform="translate(200, 110)">
+        <path d={SL} fill="#ffffff" opacity="0.9" transform="scale(1.5)" />
+      </g>
+      
+      <text x="200" y="210" textAnchor="middle" fontFamily="'Outfit', sans-serif" fontSize="22" fontWeight="300" letterSpacing="6" fill="#ffffff">EID MUBARAK</text>
+      <text x="200" y="260" textAnchor="middle" fontFamily="'Anek Bangla', sans-serif" fontSize="32" fontWeight="700" fill="#ffffff">ঈদ মুবারক</text>
+
+      <line x1="120" y1="300" x2="280" y2="300" stroke="#ffffff" strokeWidth="1" opacity="0.3" />
+
+      <g transform="translate(0, 350)">
+        {hasMsg ? (
+          <>
+            <Msg text={messageBn} x={200} y={0} color={messageColor || textColor} font={`'${messageFont}', sans-serif`} size={parseInt(messageSize)} />
+            <Msg text={messageEn} x={200} y={messageBn ? parseInt(messageSize) * 2.5 : 0} color={messageColor || textColor} font={`'${messageFont}', sans-serif`} size={Math.max(10, parseInt(messageSize) - 1)} />
+          </>
+        ) : <Lines color={messageColor || textColor} x1="90" x2="310" y0="0" gap={28} n={3} dash="1,0" />}
+      </g>
+    </svg>
+  );
+}
+
+/* ─── 10. VINTAGE TICKET ───────────────────────────────────────────────── */
+export function VintageTicketLayout({
+  bgColor = '#fdfbf7', accentColor = '#8c7a6b', textColor = '#2c2825',
+  messageBn = '', messageEn = '', toName = '', fromName = '',
+  messageFont = 'Playfair Display', messageSize = '14', messageColor = '',
+}) {
+  const hasMsg = !!(messageBn || messageEn);
+  return (
+    <svg width="400" height="560" viewBox="0 0 400 560" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block' }}>
+      <rect width="400" height="560" fill={bgColor} />
+      
+      <path d="M 20 20 L 380 20 L 380 180 A 15 15 0 0 1 365 195 A 15 15 0 0 1 380 210 L 380 540 L 20 540 L 20 210 A 15 15 0 0 1 35 195 A 15 15 0 0 1 20 180 Z" fill="none" stroke={accentColor} strokeWidth="1.5" />
+      <path d="M 26 26 L 374 26 L 374 180 A 21 21 0 0 1 353 195 A 21 21 0 0 1 374 210 L 374 534 L 26 534 L 26 210 A 21 21 0 0 1 47 195 A 21 21 0 0 1 26 180 Z" fill="none" stroke={accentColor} strokeWidth="0.5" />
+
+      <line x1="45" y1="195" x2="355" y2="195" stroke={accentColor} strokeWidth="1.5" strokeDasharray="6,4" />
+
+      <text x="200" y="55" textAnchor="middle" fontFamily="'Cinzel', serif" fontSize="14" letterSpacing="4" fill={accentColor}>NO. 00814</text>
+      <text x="200" y="100" textAnchor="middle" fontFamily="'Cinzel', serif" fontSize="34" fontWeight="bold" letterSpacing="2" fill={textColor}>EID AL-FITR</text>
+      <text x="200" y="140" textAnchor="middle" fontFamily="'Inter', sans-serif" fontSize="14" letterSpacing="8" fill={accentColor}>CELEBRATION</text>
+      
+      <path d="M 120 160 Q 200 170 280 160" fill="none" stroke={accentColor} strokeWidth="0.8" />
+      <circle cx="200" cy="165" r="2.5" fill={accentColor} />
+
+      <text x="200" y="250" textAnchor="middle" fontFamily="'Anek Bangla', sans-serif" fontSize="28" fontWeight="700" fill={textColor}>ঈদ মুবারক</text>
+      
+      <circle cx="200" cy="310" r="34" fill="none" stroke={accentColor} strokeWidth="0.8" />
+      <circle cx="200" cy="310" r="30" fill="none" stroke={accentColor} strokeWidth="0.5" strokeDasharray="2,2" />
+      <g transform="translate(133, 274) scale(0.34)"><Mosque f={accentColor} /></g>
+      
+      <rect x="60" y="370" width="280" height="0.5" fill={accentColor} />
+      <rect x="60" y="374" width="280" height="0.5" fill={accentColor} />
+
+      <g transform="translate(0, 410)">
+        {hasMsg ? (
+          <>
+            <Msg text={messageBn} x={200} y={0} color={messageColor || textColor} font={`'${messageFont}', sans-serif`} size={parseInt(messageSize)} />
+            <Msg text={messageEn} x={200} y={messageBn ? parseInt(messageSize) * 2.5 : 0} color={messageColor || textColor} font={`'${messageFont}', sans-serif`} size={Math.max(10, parseInt(messageSize) - 1)} />
+          </>
+        ) : <Lines color={messageColor || accentColor} x1={70} x2={330} y0={0} gap={30} n={3} dash="1,0" />}
+      </g>
+      
+      <g transform="translate(130, 500)">
+        {[0, 4, 10, 12, 18, 22, 28, 30, 36, 40, 42, 48, 56, 60, 64, 66, 72, 80, 84, 90, 94, 100, 108, 112, 116, 124, 128, 134, 138, 140].map((x, i) => (
+          <rect key={i} x={x} y="0" width={i%3===0 ? 2 : 1} height="15" fill={accentColor} opacity="0.7" />
+        ))}
+      </g>
     </svg>
   );
 }
