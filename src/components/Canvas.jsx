@@ -189,11 +189,12 @@ const Canvas = ({ elements, updateElement, removeElement, activeElementId, setAc
             <div style={{
               position: 'absolute',
               top: '24px',
-              left: '50%',
-              transform: 'translateX(-50%)',
+              left: '0',
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'center',
               zIndex: 10,
               pointerEvents: 'none',
-              whiteSpace: 'nowrap',
             }}>
               <div style={{
                 padding: '6px 20px',
@@ -306,11 +307,12 @@ const Canvas = ({ elements, updateElement, removeElement, activeElementId, setAc
             <div style={{
               position: 'absolute',
               bottom: '24px',
-              left: '50%',
-              transform: 'translateX(-50%)',
+              left: '0',
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'center',
               zIndex: 10,
               pointerEvents: 'none',
-              whiteSpace: 'nowrap',
             }}>
               <div style={{
                 padding: '5px 18px',
