@@ -22,7 +22,12 @@ const PRESET_GRADIENTS = [
 ];
 
 const STICKERS = ['🌙', '🕌', '✨', '⭐', '🏮', '📿', '🕋', '🌟', '🎆', '🤲', '💚', '🌿', '🌹', '🎁', '💫', '🪷'];
-const FONTS = ['Anek Bangla', 'Inter', 'Outfit', 'Georgia', 'Impact', 'Trebuchet MS'];
+const FONTS = [
+    'Anek Bangla', 'Inter', 'Outfit', 
+    'Playfair Display', 'Cinzel', 'Dancing Script', 
+    'Pacifico', 'Great Vibes', 'Montserrat', 
+    'Georgia', 'Impact', 'Trebuchet MS'
+];
 const TEXT_COLORS = ['#0f172a', '#ffffff', '#fde68a', '#86efac', '#f9a8d4', '#93c5fd', '#ef4444', '#22c55e', '#c084fc', '#f59e0b'];
 const TEXT_SIZES = [
     { label: 'S', value: '18px' },
