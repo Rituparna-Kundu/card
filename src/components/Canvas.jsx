@@ -210,7 +210,7 @@ const Canvas = ({ elements, updateElement, removeElement, activeElementId, setAc
                 <span style={{
                   fontFamily: "'Outfit', 'Anek Bangla', sans-serif",
                   fontSize: '16px',
-                  fontWeight: 800,
+                  fontWeight: 400,
                   color: hexToRgba(canvasBorderColor || '#fde68a', 1),
                   letterSpacing: '1.2px',
                   textTransform: 'uppercase',
